@@ -4,6 +4,10 @@ A small Herdr mod that visualizes Magpie gateway routing in a floating panel.
 
 ![Herdr Magpie Routing preview](preview.png)
 
+## Demo
+
+[▶ Watch the live routing demo](demo/routing-demo.mp4)
+
 > This project is intended to be installed by a coding agent. The agent MUST read [`AGENTS.md`](AGENTS.md) before editing a user's Herdr files.
 
 ## What it does
