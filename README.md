@@ -1,0 +1,67 @@
+# Herdr Magpie Routing
+
+A small Herdr mod that visualizes Magpie gateway routing in a floating panel.
+
+> This project is intended to be installed by a coding agent. The agent MUST read [`AGENTS.md`](AGENTS.md) before editing a user's Herdr files.
+
+## What it does
+
+It reads Magpie's live trace from `http://127.0.0.1:3425/v1/magpie/trace` and displays:
+
+```text
+Agent  →  Magpie  →  provider/model
+Agent  ←  Magpie  ←  provider/model
+```
+
+The moving bee carries one petal packet. The packet stays at the provider while the response is generated, then the return bee carries it home. Completed cards linger briefly, but the packet is removed after delivery.
+
+This mod is observational. It does not modify Magpie routing, provider accounts, prompts or gateway settings.
+
+## Installation by an Agent
+
+Give the Agent this repository URL and ask it to:
+
+> Read `AGENTS.md` in this repository. Install the Routing mod into my existing Herdr setup without overwriting my layout or mods. Add the floating panel and a Routing toggle beside Files/Changes, run the required checks, and show me the diff before finishing.
+
+The Agent should copy only the mod files and make a minimal change to the user's existing layout/header. It should not copy this repository's `.git`, tests, docs or runtime data into the user's Herdr directory.
+
+## Requirements
+
+- Herdr with GPUI mod support;
+- a running Magpie gateway on port `3425`;
+- `curl` on the machine where the trace is read;
+- permission to install a trusted Herdr mod that executes `curl` via Herdr's `exec` API.
+
+The mod reads route metadata including Agent, provider/model, session, retry and status. It does not read or store prompt text.
+
+## Repository contents
+
+```text
+AGENTS.md              Agent-facing installation contract
+mods/routing/          Installable Herdr mod and visual assets
+tests/                 Offline lifecycle and Magpie-parity tests
+```
+
+## Local validation
+
+From this repository:
+
+```sh
+herdr-app check <herdr-root>/mods/routing
+node --test tests/routing-flight.test.cjs tests/routing-lifecycle.test.cjs
+MAGPIE_ROOT=/path/to/magpie node --test tests/routing-magpie-parity.test.cjs
+```
+
+On Windows, use the equivalent environment-variable syntax for your shell.
+
+## Security and privacy
+
+This is trusted code. It launches `curl` through Herdr and reads the Magpie trace endpoint. Review the source before installing. Do not publish screenshots containing paths, session names, account names or prompt content.
+
+## Asset provenance
+
+The flower and bee assets are GPT-generated artwork supplied by the user. The user confirmed that they may be used in this project. The Magpie visual asset is kept as project artwork; this project does not claim Magpie or Herdr trademarks. Verify any trademark or logo requirements before publishing a public release.
+
+## License
+
+No public code license has been selected yet. Keep this repository private until a maintainer chooses a license and resolves the bee asset rights.

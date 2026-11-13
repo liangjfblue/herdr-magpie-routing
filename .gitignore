@@ -1,0 +1,18 @@
+# Local agent/editor state
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.tmp.*
+*.error
+*.bak
+
+# Generated declarations and dependencies
+**/node_modules/
+**/gpui-kit.d.ts
+**/herdr.d.ts
+**/jsconfig.json
+
+# Private captures and local runtime data
+*.png.private
+captures/
