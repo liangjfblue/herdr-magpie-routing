@@ -73,7 +73,7 @@ This is trusted code. It launches `curl` through Herdr and reads the Magpie trac
 
 ## Asset provenance
 
-The flower and bee assets are GPT-generated artwork supplied by the user. The user confirmed that they may be used in this project. The Magpie visual asset is kept as project artwork; this project does not claim Magpie or Herdr trademarks. Verify any trademark or logo requirements before publishing a public release.
+The flower, bee carrier and center bee icon are GPT-generated artwork supplied by the user. The user confirmed that they may be used in this project. The center icon replaces the previous Magpie mark. This project does not claim Magpie or Herdr trademarks; verify any trademark or logo requirements before publishing a public release.
 
 ## License
 

@@ -25,7 +25,7 @@ The mod reads Magpie's trace; it does not route requests or change Magpie config
 5. Do not copy the repository's tests, docs or `.git` directory into the user's Herdr directory unless requested.
 6. Do not expose credentials or commit Herdr runtime data, session data, screenshots containing private content, `shared.json`, `view.json`, `data/`, telemetry, sockets or generated `.d.ts` files.
 7. Tell the user that this mod executes `curl` through Herdr's `exec` API and reads the local Magpie trace endpoint. It is trusted code and has network/process access by design.
-8. The bee PNGs and the flower asset are included visual assets. The user supplied the flower and confirmed that the GPT-generated flower and bee artwork may be used in this project. Keep that provenance note when redistributing the repository.
+8. The flower, bee carrier and center icon are included visual assets. The user supplied the flower and center bee icon and confirmed that the GPT-generated artwork may be used in this project. Keep that provenance note when redistributing the repository.
 
 ## Prerequisites
 
