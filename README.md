@@ -1,5 +1,7 @@
 # Herdr Magpie Routing
 
+[English](README.md) · [简体中文](README.zh-CN.md)
+
 A small Herdr mod that visualizes Magpie gateway routing in a floating panel.
 
 ![Herdr Magpie Routing preview](preview.png)
@@ -26,11 +28,15 @@ This mod is observational. It does not modify Magpie routing, provider accounts,
 
 ## Installation by an Agent
 
-Give the Agent this repository URL and ask it to:
+Give the Agent this repository URL and ask it to read the complete installation contract:
 
-> Read [`AGENTS.md`](https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md) in this repository. Install the Routing mod into my existing Herdr setup without overwriting my layout or mods. Add the floating panel and a Routing toggle beside Files/Changes, run the required checks, and show me the diff before finishing.
+[`https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md`](https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md)
 
-The Agent should copy only the mod files and make a minimal change to the user's existing layout/header. It should not copy this repository's `.git`, tests, docs or runtime data into the user's Herdr directory.
+The user does not need to download this repository first. The Agent can read the raw project files from GitHub and install only the required mod files into the user's existing Herdr setup.
+
+### Copyable English prompt
+
+> Read [`https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md`](https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md) before changing files. Install the Routing mod into my existing Herdr setup without overwriting my layout or mods. Add the floating panel and a Routing toggle beside Files/Changes, run the required checks, and show me the diff before finishing.
 
 ## Requirements
 
