@@ -6,9 +6,10 @@ A small Herdr mod that visualizes Magpie gateway routing in a floating panel.
 
 ## Demo
 
-[▶ Watch the live routing demo](demo/routing-demo.mp4)
+[![Watch the live routing demo](demo/routing-demo.gif)](demo/routing-demo.mp4)
 
-> This project is intended to be installed by a coding agent. The agent MUST read [`AGENTS.md`](AGENTS.md) before editing a user's Herdr files.
+[▶ Open the full routing demo video](demo/routing-demo.mp4)
+
 
 ## What it does
 
@@ -27,7 +28,7 @@ This mod is observational. It does not modify Magpie routing, provider accounts,
 
 Give the Agent this repository URL and ask it to:
 
-> Read `AGENTS.md` in this repository. Install the Routing mod into my existing Herdr setup without overwriting my layout or mods. Add the floating panel and a Routing toggle beside Files/Changes, run the required checks, and show me the diff before finishing.
+> Read [`AGENTS.md`](https://github.com/liangjfblue/herdr-magpie-routing/blob/main/AGENTS.md) in this repository. Install the Routing mod into my existing Herdr setup without overwriting my layout or mods. Add the floating panel and a Routing toggle beside Files/Changes, run the required checks, and show me the diff before finishing.
 
 The Agent should copy only the mod files and make a minimal change to the user's existing layout/header. It should not copy this repository's `.git`, tests, docs or runtime data into the user's Herdr directory.
 
