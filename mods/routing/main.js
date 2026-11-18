@@ -114,11 +114,16 @@ function target(route, attempt = (route.tries || []).length - 1) {
   const requestedModel = text(route.model);
   const groupRef = text(route.group?.id, text(route.group?.ref, requestedModel.startsWith("group/") ? requestedModel.slice(6) : ""));
   const origin = route.traceOrigin || "local";
-  return { key: JSON.stringify([origin, provider, model, groupRef]), name: text(seat?.name, provider), provider, model, groupRef, origin };
+  // One place per provider, as Magpie's stage keys its places: a model the
+  // vendor renames, or a group resolving inside the provider, still fills
+  // the same card instead of stacking a second one mid-round.
+  return { key: JSON.stringify([origin, provider]), name: text(seat?.name, provider), provider, model, groupRef, origin };
 }
 
 function targetColor(t, destination) {
-  const value = destination.groupRef || `${destination.provider}:${destination.model}`;
+  // The card outlives any one request now, so its tint follows the place,
+  // not the request that happened to land there first.
+  const value = destination.provider;
   let hash = 0;
   for (let i = 0; i < value.length; i++) hash = (hash * 31 + value.charCodeAt(i)) | 0;
   return [t.ansi1, t.ansi2, t.ansi3, t.ansi4, t.ansi5, t.ansi6][Math.abs(hash) % 6] || t.accent;
@@ -499,15 +504,17 @@ export default class Routing extends View {
     });
     this.targetSlots.forEach((key, index) => {
       const destination = data.targets.get(key);
-      const activeRoute = destination.routes.find((route) => !route.done) || destination.routes[0];
+      // Latest active request names the card and its status; the others only count.
+      const activeRoute = [...destination.routes].reverse().find((route) => !route.done) || destination.routes[destination.routes.length - 1];
       const activeFlight = activeRoute && this.flights.get(activeRoute.id);
+      const shown = target(activeRoute, activeFlight && activeFlight.attempt >= 0 ? activeFlight.attempt : undefined);
       const status = routeStatus(activeRoute, activeFlight, data.now);
       const count = activeCount(destination.routes);
       const countText = count > 1 ? ` · ${count} active` : "";
-      const origin = destination.origin && destination.origin !== "local" ? ` · ${destination.origin}` : "";
+      const origin = shown.origin && shown.origin !== "local" ? ` · ${shown.origin}` : "";
       const statusText = `${status.label} · ${status.time}${countText}`;
       const accent = targetColor(t, destination);
-      children.push(this.node(t, destination.name, `${destination.model}${origin}`, false, count > 0, false, "", statusText, accent, statusColor(t, status))
+      children.push(this.node(t, shown.name, `${shown.model}${origin}`, false, count > 0, false, "", statusText, accent, statusColor(t, status))
         .tooltip(this.routeTooltip(activeRoute, activeFlight, data.now))
         .absolute().left(DEST_X).top(centerY(index, this.targetSlots.length, data.height) - DEST_H / 2));
     });

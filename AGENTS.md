@@ -8,7 +8,7 @@ Install the `routing` mod so Herdr shows Magpie's live gateway trace in a floati
 
 - the requesting Agent on the left;
 - Magpie in the middle;
-- the selected provider/model on the right;
+- one card per provider on the right, named by the newest active request's model; a provider's other requests — other models, group resolutions, retries — merge into that card instead of stacking a second one (Magpie's own stage keys its places by provider);
 - a bee carrying a petal from Agent to provider;
 - the same petal held at the provider while it generates;
 - a return bee carrying that petal back to the Agent when the route finishes;

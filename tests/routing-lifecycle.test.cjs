@@ -85,6 +85,21 @@ test('source names distinguish machines; tooltip includes session and subagent',
   assert.notEqual(api.target(a).key, api.target(b).key);
 });
 
+test('one place per provider: model or group changes do not split a destination card', () => {
+  const h = harness();
+  const mk = (id, extra = {}) => ({ id, done: false, agent: 'omp', time: new Date(90000).toISOString(), provider: 'baidu',
+    model: 'baidu/DeepSeek-V4.5', tries: [{ id: 't' + id, model: 'DeepSeek-V4.5', done: false }], order: [], ...extra });
+  const a = mk(1), b = mk(2, { model: 'baidu/deepseek-v4.5', tries: [{ id: 't2', model: 'deepseek-v4.5', done: false }] });
+  const c = mk(3, { group: { id: 'g1' } });
+  assert.equal(h.api.target(a).key, h.api.target(b).key);
+  assert.equal(h.api.target(a).key, h.api.target(c).key);
+  h.view.routes = new Map([[a.id, a], [b.id, b]]);
+  h.view.flights = new Map([[a.id, { id: a.id, attempt: -1 }], [b.id, { id: b.id, attempt: -1 }]]);
+  const cards = [...h.view.stageData().targets.values()];
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].routes.length, 2);
+});
+
 test('hover details expose route identity, retry and latency without persistent state', () => {
   const h = harness();
   const r = { ...route(7), traceOrigin: 'local', subagentId: 'worker', error: 'upstream failed', tries: [
