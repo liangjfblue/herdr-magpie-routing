@@ -4,7 +4,7 @@ import { exec, theme, shared, setShared, agents, focused, terminals, spaces } fr
 
 const TRACE_URL = "http://127.0.0.1:3425/v1/magpie/trace";
 const WIDTH = 400;
-const SOURCE_X = 8, SOURCE_W = 90, SOURCE_H = 28;
+const SOURCE_X = 8, SOURCE_W = 104, SOURCE_H = 28;
 const DEST_X = 292, DEST_W = 94, DEST_H = 58;
 const HUB_X = 154, HUB_SIZE = 42;
 const LEG_MS = 480, STEPS = 4;
@@ -92,7 +92,9 @@ function stagedRoutes(routes, flights, currentRouteId, now) {
 function sourceName(route) {
   const agent = text(route.agent, "agent");
   const origin = route.traceOrigin && route.traceOrigin !== "local" ? "远程" : "本机";
-  return `${agent} · ${origin}`;
+  // No spaces around the dot: "codex·本机" is the widest label the 104px
+  // source card takes without cutting the machine word off mid-glyph.
+  return `${agent}·${origin}`;
 }
 function sourceTooltip(route) {
   const session = text(route.session, text(route.conv, ""));

@@ -80,7 +80,7 @@ test('source names distinguish machines; tooltip includes session and subagent',
   const { api } = harness(); const a = { ...route(1), traceOrigin: 'local' };
   const b = { ...a, traceOrigin: 'remote', subagentId: 'worker' };
   assert.notEqual(api.sourceKey(a), api.sourceKey(b));
-  assert.equal(api.sourceName(a), 'omp · 本机'); assert.equal(api.sourceName(b), 'omp · 远程');
+  assert.equal(api.sourceName(a), 'omp·本机'); assert.equal(api.sourceName(b), 'omp·远程');
   assert.match(api.sourceTooltip(b), /session-1/); assert.match(api.sourceTooltip(b), /worker/);
   assert.notEqual(api.target(a).key, api.target(b).key);
 });
